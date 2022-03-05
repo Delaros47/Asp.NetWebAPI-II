@@ -19,6 +19,7 @@ namespace HotelFinder.DataAccess.Concrete.EntityFramework
                 var addedEntity = context.Entry(hotel);
                 addedEntity.State = EntityState.Added;
                 context.SaveChanges();
+                return hotel;
             }
         }
 
@@ -50,7 +51,13 @@ namespace HotelFinder.DataAccess.Concrete.EntityFramework
 
         public Hotel Update(Hotel hotel)
         {
-            throw new NotImplementedException();
+            using (var context = new HotelContext())
+            {
+                var updatedEntity = context.Entry(hotel);
+                updatedEntity.State = EntityState.Modified;
+                context.SaveChanges();
+                return hotel;
+            }
         }
     }
 }
